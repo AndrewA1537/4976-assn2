@@ -9,7 +9,7 @@ using NonProfitLibrary;
 
 namespace NonProfitApp.Services;
 
-// [Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin")]
 public class ContactListService
 {
     private readonly ApplicationDbContext _context;
