@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using NonProfitApp.Areas.Identity;
 using NonProfitApp.Data;
+using NonProfitApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+
+// BELOW LINES ARE NEW Scoped lifetime services are created once per client request
+builder.Services.AddScoped<ContactListService>();
+builder.Services.AddScoped<DonationsService>();
+builder.Services.AddScoped<PaymentMethodService>();
+builder.Services.AddScoped<TransactionTypeService>();
 
 
 
