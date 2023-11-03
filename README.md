@@ -568,3 +568,149 @@ Brief description of your project.
         }
     }
     ```
+
+11. **Make sure to add these in program.cs**:
+
+    ```cs
+    // BELOW LINES ARE NEW Scoped lifetime services are created once per client request
+    builder.Services.AddScoped<ContactListService>();
+    builder.Services.AddScoped<DonationsService>();
+    builder.Services.AddScoped<PaymentMethodService>();
+    builder.Services.AddScoped<TransactionTypeService>();
+
+    var app = builder.Build();
+    ```
+
+12. **Now run migrations and update the database**:
+
+    ```bash
+    dotnet ef migrations add M1 -o Data/Migrations
+
+    dotnet ef database update
+    ```
+
+13. **Now make a folder called Services which will contain all the services that will interact with the db and do CRUD operations**:
+
+    ```cs
+    [Authorize(Roles = "Admin")]
+    public class ContactListService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ContactListService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<List<ContactList>> GetContactsAsync()
+        {
+            return await _context.ContactList.ToListAsync();
+        }
+
+        public async Task<ContactList?> GetContactByIdAsync(int id)
+        {
+            return await _context.ContactList
+                .FirstOrDefaultAsync(m => m.AccountNo == id);
+        }
+
+        public async Task<ContactList> InsertContactAsync(ContactList contact)
+        {
+            _context.ContactList.Add(contact);
+            await _context.SaveChangesAsync();
+            return contact;
+        }
+
+        public async Task<ContactList?> UpdateContactAsync(int id, ContactList updatedContact)
+        {
+            var contact = await _context.ContactList.FindAsync(id);
+            if (contact == null)
+            {
+                return null;
+            }
+
+            // Update the properties
+            contact.FirstName = updatedContact.FirstName;
+            contact.LastName = updatedContact.LastName;
+            // ... Other properties
+
+            _context.Update(contact);
+            await _context.SaveChangesAsync();
+            return contact;
+        }
+
+        public async Task<ContactList?> DeleteContactAsync(int id)
+        {
+            var contact = await _context.ContactList.FindAsync(id);
+            if (contact == null)
+            {
+                return null;
+            }
+
+            _context.ContactList.Remove(contact);
+            await _context.SaveChangesAsync();
+            return contact;
+        }
+
+        private bool ContactListExists(int id)
+        {
+            return _context.ContactList.Any(e => e.AccountNo == id);
+        }
+    }
+    ```
+
+14. **Now make a corresponding razor page to dipsplay the data**:
+
+    ```cs
+    @page "/fetchcontacts"
+    @using Services
+    @inject ContactListService contactListService
+
+    <h1>Contacts</h1>
+
+    @if (contacts == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else if (contacts.Count == 0)
+    {
+        <p><em>No contacts found.</em></p>
+    }
+    else
+    {
+        <table class='table table-hover'>
+            <thead>
+                <tr>
+                    <th>Account No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in contacts)
+                {
+                    <tr>
+                        <td>@contact.AccountNo</td>
+                        <td>@contact.FirstName @contact.LastName</td>
+                        <td>@contact.Email</td>
+                        <td>@contact.Street, @contact.City, @contact.PostalCode, @contact.Country</td>
+                        <td><a class="btn btn-success btn-sm" href="/editcontact/@contact.AccountNo">Edit</a></td>
+                        <td><a class="btn btn-danger btn-sm" href="/deletecontact/@contact.AccountNo">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    @code
+    {
+        List<NonProfitLibrary.ContactList>? contacts;
+
+        protected override async Task OnInitializedAsync()
+        {
+            contacts = await contactListService.GetContactsAsync();
+        }
+    }
+    ```

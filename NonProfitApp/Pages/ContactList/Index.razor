@@ -1,0 +1,64 @@
+@page "/ContactList/Index"
+@using Services
+@inject ContactListService contactListService
+
+<h1>Index</h1>
+
+<p>
+    <a href="/ContactList/Create" class="btn btn-primary">Create New</a>
+</p>
+
+@if (contacts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (contacts.Count == 0)
+{
+    <p><em>No contacts found.</em></p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contacts)
+            {
+                <tr>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.Email</td>
+                    <td>@contact.Street</td>
+                    <td>@contact.City</td>
+                    <td>@contact.PostalCode</td>
+                    <td>@contact.Country</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="/editcontact/@contact.AccountNo">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="/detailscontact/@contact.AccountNo">Details</a>
+                        <a class="btn btn-danger btn-sm" href="/deletecontact/@contact.AccountNo">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    List<NonProfitLibrary.ContactList>? contacts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contacts = await contactListService.GetContactsAsync();
+    }
+}
