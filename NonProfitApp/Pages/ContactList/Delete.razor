@@ -1,0 +1,67 @@
+@page "/ContactList/Delete/{AccountId:int}"
+@using NonProfitLibrary
+@using Services
+@inject ContactListService contactListService
+@inject NavigationManager NavigationManager
+
+<h1>Delete Contact</h1>
+
+@if (contact == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Contact Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">First Name</dt>
+            <dd class="col-sm-10">@contact.FirstName</dd>
+
+            <dt class="col-sm-2">Last Name</dt>
+            <dd class="col-sm-10">@contact.LastName</dd>
+
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@contact.Email</dd>
+
+            <dt class="col-sm-2">Street</dt>
+            <dd class="col-sm-10">@contact.Street</dd>
+
+            <dt class="col-sm-2">City</dt>
+            <dd class="col-sm-10">@contact.City</dd>
+
+            <dt class="col-sm-2">Postal Code</dt>
+            <dd class="col-sm-10">@contact.PostalCode</dd>
+
+            <dt class="col-sm-2">Country</dt>
+            <dd class="col-sm-10">@contact.Country</dd>
+        </dl>
+
+        <button @onclick="DeleteContact" class="btn btn-danger">Delete</button>
+        <a href="/ContactList/Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+
+@code
+{
+    private ContactList? contact;
+
+    [Parameter] public int AccountId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contact = await contactListService.GetContactByIdAsync(AccountId);
+    }
+
+    private async Task DeleteContact()
+    {
+        if (contact != null)
+        {
+            await contactListService.DeleteContactAsync(contact.AccountNo);
+            // Redirect to the index page after deletion.
+            NavigationManager.NavigateTo("/ContactList/Index");
+        }
+    }
+}

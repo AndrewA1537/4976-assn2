@@ -1,0 +1,49 @@
+@page "/ContactList/Details/{AccountId:int}"
+@using Services
+@inject ContactListService contactListService
+
+<h1>Details</h1>
+
+@if (contact == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <h4>ContactList</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">First Name</dt>
+            <dd class="col-sm-10">@contact.FirstName</dd>
+            <dt class="col-sm-2">Last Name</dt>
+            <dd class="col-sm-10">@contact.LastName</dd>
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@contact.Email</dd>
+            <dt class="col-sm-2">Street</dt>
+            <dd class="col-sm-10">@contact.Street</dd>
+            <dt class="col-sm-2">City</dt>
+            <dd class="col-sm-10">@contact.City</dd>
+            <dt class="col-sm-2">Postal Code</dt>
+            <dd class="col-sm-10">@contact.PostalCode</dd>
+            <dt class="col-sm-2">Country</dt>
+            <dd class="col-sm-10">@contact.Country</dd>
+        </dl>
+    </div>
+    <div>
+        <a class="btn btn-warning" href="/ContactList/Edit/@contact.AccountNo">Edit</a> |
+        <a class="btn btn-secondary" href="/ContactList/Index">Back to List</a>
+    </div>
+}
+
+@code 
+{
+    [Parameter] public int AccountId { get; set; }
+
+    private NonProfitLibrary.ContactList? contact;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contact = await contactListService.GetContactByIdAsync(AccountId);
+    }
+}
