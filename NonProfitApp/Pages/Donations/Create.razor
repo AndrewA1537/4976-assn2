@@ -1,0 +1,121 @@
+@page "/Donations/Create"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+@inject ContactListService accountService
+@inject TransactionTypeService transactionTypeService
+@inject PaymentMethodService paymentMethodService
+@inject NavigationManager NavigationManager
+
+<h1>Create Donation</h1>
+
+<h4>Donation</h4>
+
+@if (newDonation == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+
+            <EditForm Model="newDonation" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <!-- Date Input -->
+                <div class="form-group">
+                    <label for="Date">Date</label>
+                    <InputDate id="Date" @bind-Value="newDonation.Date" class="form-control" />
+                    <ValidationMessage For="@(() => newDonation.Date)" />
+                </div>
+
+                <!-- AccountNo Dropdown -->
+                <div class="form-group">
+                    <label for="Account">Account</label>
+                    <InputSelect id="Account" @bind-Value="newDonation.AccountNo" class="form-control">
+                        <option value="">-- Select Account No --</option>
+                        @foreach (var account in accounts ?? new List<ContactList>())
+                        {
+                            <option value="@account.AccountNo">@account.Email</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => newDonation.AccountNo)" />
+                </div>
+
+                <!-- TransactionType Dropdown -->
+                <div class="form-group">
+                    <label for="TransactionTypeId">Transaction Type</label>
+                    <InputSelect id="TransactionTypeId" @bind-Value="newDonation.TransactionTypeId" class="form-control">
+                        <option value="">-- Select Transaction Type --</option>
+                        @foreach (var transactionType in transactionTypes ?? new List<TransactionType>())
+                        {
+                            <option value="@transactionType.TransactionTypeId">@transactionType.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => newDonation.TransactionTypeId)" />
+                </div>
+
+                <!-- Amount Input -->
+                <div class="form-group">
+                    <label for="Amount">Amount</label>
+                    <InputNumber id="Amount" @bind-Value="newDonation.Amount" class="form-control" />
+                    <ValidationMessage For="@(() => newDonation.Amount)" />
+                </div>
+
+                <!-- PaymentMethod Dropdown -->
+                <div class="form-group">
+                    <label for="PaymentMethodId">Payment Method</label>
+                    <InputSelect id="PaymentMethodId" @bind-Value="newDonation.PaymentMethodId" class="form-control">
+                        <option value="">-- Select Payment Method --</option>
+                        @foreach (var paymentMethod in paymentMethods ?? new List<PaymentMethod>())
+                        {
+                            <option value="@paymentMethod.PaymentMethodId">@paymentMethod.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => newDonation.PaymentMethodId)" />
+                </div>
+
+                <!-- Notes Input -->
+                <div class="form-group">
+                    <label for="Notes">Notes</label>
+                    <InputTextArea id="Notes" @bind-Value="newDonation.Notes" class="form-control" />
+                    <ValidationMessage For="@(() => newDonation.Notes)" />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </EditForm>
+
+        </div>
+    </div>
+
+    <!-- Back Link -->
+    <div>
+        <a href="/Donations/Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+
+@code
+{
+    private Donations newDonation = new Donations();
+    private List<ContactList>? accounts;
+    private List<TransactionType>? transactionTypes;
+    private List<PaymentMethod>? paymentMethods;
+
+    protected override async Task OnInitializedAsync()
+    {
+        accounts = await accountService.GetContactsAsync();
+        transactionTypes = await transactionTypeService.GetAllTransactionTypesAsync();
+        paymentMethods = await paymentMethodService.GetAllPaymentMethodsAsync();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await donationsService.CreateDonationAsync(newDonation);
+        NavigationManager.NavigateTo("/Donations/Index");
+    }
+}

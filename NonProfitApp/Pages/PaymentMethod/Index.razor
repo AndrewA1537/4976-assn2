@@ -1,0 +1,52 @@
+@page "/PaymentMethod/Index"
+@using Services
+@inject PaymentMethodService paymentMethodService
+
+<h1>Index</h1>
+
+<p>
+    <a href="/PaymentMethod/Create" class="btn btn-primary">Create New</a>
+</p>
+
+@if (paymentMethods == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (paymentMethods.Count == 0)
+{
+    <p><em>No contacts found.</em></p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var paymentMethod in paymentMethods)
+            {
+                <tr>
+                    <td>@paymentMethod.Name</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="/PaymentMethod/Edit/@paymentMethod.PaymentMethodId">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="/PaymentMethod/Details/@paymentMethod.PaymentMethodId">Details</a>
+                        <a class="btn btn-danger btn-sm" href="/PaymentMethod/Delete/@paymentMethod.PaymentMethodId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    List<NonProfitLibrary.PaymentMethod>? paymentMethods;
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentMethods = await paymentMethodService.GetAllPaymentMethodsAsync();
+    }
+}

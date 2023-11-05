@@ -1,0 +1,54 @@
+@page "/TransactionType/Index"
+@using Services
+@inject TransactionTypeService transactionTypeService
+
+<h1>Index</h1>
+
+<p>
+    <a href="/TransactionType/Create" class="btn btn-primary">Create New</a>
+</p>
+
+@if (transactionTypes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (transactionTypes.Count == 0)
+{
+    <p><em>No contacts found.</em></p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transactionType in transactionTypes)
+            {
+                <tr>
+                    <td>@transactionType.Name</td>
+                    <td>@transactionType.Description</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="/TransactionType/Edit/@transactionType.TransactionTypeId">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="/TransactionType/Details/@transactionType.TransactionTypeId">Details</a>
+                        <a class="btn btn-danger btn-sm" href="/TransactionType/Delete/@transactionType.TransactionTypeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    List<NonProfitLibrary.TransactionType>? transactionTypes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        transactionTypes = await transactionTypeService.GetAllTransactionTypesAsync();
+    }
+}

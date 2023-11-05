@@ -1,0 +1,107 @@
+@page "/Donations/Edit/{DonationId:int}"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+@inject ContactListService accountService
+@inject TransactionTypeService transactionTypeService
+@inject PaymentMethodService paymentMethodService
+@inject NavigationManager NavigationManager
+
+<h1>Edit Donation</h1>
+
+@if (donation == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Edit Donation Details</h3>
+    <EditForm Model="donation" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="Date">Date</label>
+            <InputDate id="Date" @bind-Value="donation.Date" class="form-control" />
+            <ValidationMessage For="@(() => donation.Date)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="AccountNo">Account Number</label>
+            <InputSelect id="AccountNo" @bind-Value="donation.AccountNo" class="form-control">
+                @foreach (var account in accounts ?? new List<ContactList>()) // Assuming you have a list named accounts
+                {
+                    <option value="@account.AccountNo">@account.FirstName</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => donation.AccountNo)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="TransactionTypeId">Transaction Type</label>
+            <InputSelect id="TransactionTypeId" @bind-Value="donation.TransactionTypeId" class="form-control">
+                @foreach (var transactionType in transactionTypes ?? new List<TransactionType>()) // Assuming you have a list named transactionTypes
+                {
+                    <option value="@transactionType.TransactionTypeId">@transactionType.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => donation.TransactionTypeId)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="Amount">Amount</label>
+            <InputNumber id="Amount" @bind-Value="donation.Amount" class="form-control" />
+            <ValidationMessage For="@(() => donation.Amount)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="PaymentMethodId">Payment Method</label>
+            <InputSelect id="PaymentMethodId" @bind-Value="donation.PaymentMethodId" class="form-control">
+                @foreach (var paymentMethod in paymentMethods ?? new List<PaymentMethod>()) // Assuming you have a list named paymentMethods
+                {
+                    <option value="@paymentMethod.PaymentMethodId">@paymentMethod.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => donation.PaymentMethodId)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="Notes">Notes</label>
+            <InputTextArea id="Notes" @bind-Value="donation.Notes" class="form-control" />
+            <ValidationMessage For="@(() => donation.Notes)" class="text-danger" />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/Donations/Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </EditForm>
+
+}
+
+@code {
+    private Donations? donation;
+    private List<ContactList>? accounts;
+    private List<TransactionType>? transactionTypes;
+    private List<PaymentMethod>? paymentMethods;
+
+    [Parameter] public int DonationId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        donation = await donationsService.GetDonationByIdAsync(DonationId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (donation != null)
+        {
+            var updatedDonation = await donationsService.UpdateDonationAsync(DonationId, donation);
+            if (updatedDonation != null)
+            {
+                // Redirect to the index page after editing.
+                NavigationManager.NavigateTo("/Donations/Index");
+            }
+            else
+            {
+                // Handle the case where the donation is not found in the database.
+                Console.WriteLine("Donation not found!");
+            }
+        }
+    }
+}

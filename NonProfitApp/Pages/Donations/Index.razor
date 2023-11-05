@@ -1,0 +1,72 @@
+@page "/Donations/Index"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+@inject NavigationManager navigationManager
+
+<h1>Index</h1>
+
+<p>
+    <a href="/Donations/Create" class="btn btn-primary">Create New</a>
+</p>
+
+@if (donations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (donations.Count == 0)
+{
+    <p><em>No contacts found.</em></p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Notes</th>
+                <th>Created</th>
+                <th>Last Modified</th>
+                <th>Created By</th>
+                <th>Modified By</th>
+                <th>Email</th>
+                <th>Transaction Type</th>
+                <th>Payment Method</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var donation in donations)
+            {
+                <tr>
+                    <td>@donation.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@donation.Amount</td>
+                    <td>@donation.Notes</td>
+                    <td>@donation.Created.ToString("yyyy-MM-dd")</td>
+                    <td>@donation.Modified.ToString("yyyy-MM-dd")</td>
+                    <td>@donation.CreatedBy</td>
+                    <td>@donation.ModifiedBy</td>
+                    <td>@donation?.Account?.Email</td>
+                    <td>@donation?.TransactionType?.Name</td>
+                    <td>@donation?.PaymentMethod?.Name</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="/Donations/Edit/@donation?.AccountNo">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="/Donations/Details/@donation?.AccountNo">Details</a>
+                        <a class="btn btn-danger btn-sm" href="/Donations/Delete/@donation?.AccountNo">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{
+    List<NonProfitLibrary.Donations>? donations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        donations = await donationsService.GetAllDonationsAsync();
+    }
+}

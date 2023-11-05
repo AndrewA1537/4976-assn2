@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,25 @@ namespace NonProfitApp.Services;
 public class DonationsService
 {
     private readonly ApplicationDbContext _context;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public DonationsService(ApplicationDbContext context)
+    public DonationsService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
+        _httpContextAccessor = httpContextAccessor;
+
+    }
+
+    private string GetCurrentUserId()
+    {
+        // If the resulting value is null, return an empty string or a default string
+        return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
+    }
+
+    private string GetCurrentUserName()
+    {
+        // If the resulting value is null, return an empty string or a default string
+        return _httpContextAccessor.HttpContext?.User?.Identity?.Name ?? "Anonymous";
     }
 
     public async Task<List<Donations>> GetAllDonationsAsync()
@@ -39,10 +55,15 @@ public class DonationsService
 
     public async Task<Donations> CreateDonationAsync(Donations donation)
     {
+        string currentUserName = GetCurrentUserName(); // Gets the current user's name
+
+
         // Set the creation and modification data here if needed
         donation.Created = DateTime.Now;
         donation.Modified = DateTime.Now;
         // donation.CreatedBy and ModifiedBy should be set based on the current user
+        donation.CreatedBy = currentUserName; // Set based on the current user's name
+        donation.ModifiedBy = currentUserName; // You can also separate this if different logic is needed for ModifiedBy
 
         _context.Donations.Add(donation);
         await _context.SaveChangesAsync();

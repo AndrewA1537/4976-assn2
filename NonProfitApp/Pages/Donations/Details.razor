@@ -1,0 +1,75 @@
+@page "/Donations/Details/{DonationId:int}"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+@inject NavigationManager NavigationManager
+
+
+<h1>Details</h1>
+
+@if (donation == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <h4>Donation</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Date</dt>
+            <dd class="col-sm-10">@donation.Date.ToShortDateString()</dd>
+            
+            <dt class="col-sm-2">Amount</dt>
+            <dd class="col-sm-10">@donation.Amount.ToString("C")</dd>
+
+            <dt class="col-sm-2">Notes</dt>
+            <dd class="col-sm-10">@donation.Notes</dd>
+
+            <dt class="col-sm-2">Created</dt>
+            <dd class="col-sm-10">@donation.Created.ToShortDateString()</dd>
+
+            <dt class="col-sm-2">Modified</dt>
+            <dd class="col-sm-10">@donation.Modified.ToShortDateString()</dd>
+
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@donation.CreatedBy</dd>
+
+            <dt class="col-sm-2">ModifiedBy</dt>
+            <dd class="col-sm-10">@donation.ModifiedBy</dd>
+
+            <dt class="col-sm-2">Account</dt>
+            <dd class="col-sm-10">@donation?.Account?.Email</dd>
+
+            <dt class="col-sm-2">Transaction Type</dt>
+            <dd class="col-sm-10">@donation?.TransactionType?.Name</dd>
+
+            <dt class="col-sm-2">Payment Method</dt>
+            <dd class="col-sm-10">@donation?.PaymentMethod?.Name</dd>
+        </dl>
+    </div>
+    <div>
+        <button class="btn btn-warning" @onclick="() => EditDonation(donation!.TransId)">Edit</button> |
+        <button class="btn btn-secondary" @onclick="() => BackToList()">Back to List</button>
+    </div>
+}
+
+@code {
+    private NonProfitLibrary.Donations? donation;
+    [Parameter] public int DonationId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        donation = await donationsService.GetDonationByIdAsync(DonationId);
+    }
+
+    private void EditDonation(int donationId)
+    {
+        NavigationManager.NavigateTo($"/DonationEdit/{donationId}");
+    }
+
+    private void BackToList()
+    {
+        NavigationManager.NavigateTo("/DonationList");
+    }
+}
