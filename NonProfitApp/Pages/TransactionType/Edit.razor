@@ -1,0 +1,68 @@
+@page "/TransactionType/Edit/{TransactionTypeId:int}"
+@using NonProfitLibrary
+@using Services
+@inject TransactionTypeService transactionTypeService
+@inject NavigationManager NavigationManager
+
+<h1>Edit Transaction Type</h1>
+
+@if (transactionType == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Edit Transaction Type Details</h3>
+    <EditForm Model="transactionType" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <InputText id="Name" @bind-Value="transactionType.Name" class="form-control" />
+            <ValidationMessage For="@(() => transactionType.Name)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <InputTextArea id="Description" @bind-Value="transactionType.Description" class="form-control" />
+            <ValidationMessage For="@(() => transactionType.Description)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/TransactionType/Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </EditForm>
+}
+
+@code
+{
+    private TransactionType? transactionType; // Use the correct type for TransactionType
+
+    [Parameter] public int TransactionTypeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        transactionType = await transactionTypeService.GetTransactionTypeByIdAsync(TransactionTypeId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (transactionType != null)
+        {
+            var updatedTransactionType = await transactionTypeService.UpdateTransactionTypeAsync(TransactionTypeId,
+            transactionType);
+            if (updatedTransactionType != null)
+            {
+                // Redirect to the index page after editing.
+                NavigationManager.NavigateTo("/TransactionType/Index");
+            }
+            else
+            {
+                // Handle the case where the transaction type is not found in the database.
+                // This is just a placeholder. Implement proper error handling as needed.
+                Console.WriteLine("Transaction type not found!");
+            }
+        }
+    }
+
+}

@@ -85,6 +85,9 @@ else
     protected override async Task OnInitializedAsync()
     {
         donation = await donationsService.GetDonationByIdAsync(DonationId);
+        accounts = await accountService.GetContactsAsync();
+        transactionTypes = await transactionTypeService.GetAllTransactionTypesAsync();
+        paymentMethods = await paymentMethodService.GetAllPaymentMethodsAsync();
     }
 
     private async Task HandleValidSubmit()

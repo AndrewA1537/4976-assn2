@@ -1,0 +1,61 @@
+@page "/PaymentMethod/Edit/{PaymentMethodId:int}"
+@using NonProfitLibrary
+@using Services
+@inject PaymentMethodService paymentMethodService
+@inject NavigationManager NavigationManager
+
+<h1>Edit Payment Method</h1>
+
+@if (paymentMethod == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Edit Payment Method Details</h3>
+    <EditForm Model="paymentMethod" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <InputText id="Name" @bind-Value="paymentMethod.Name" class="form-control" />
+            <ValidationMessage For="@(() => paymentMethod.Name)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/PaymentMethod/Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </EditForm>
+}
+
+@code
+{
+    private PaymentMethod? paymentMethod;
+
+    [Parameter] public int PaymentMethodId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentMethod = await paymentMethodService.GetPaymentMethodByIdAsync(PaymentMethodId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (paymentMethod != null)
+        {
+            var updatedPaymentMethod = await paymentMethodService.UpdatePaymentMethodAsync(PaymentMethodId, paymentMethod);
+            if (updatedPaymentMethod != null)
+            {
+                // Redirect to the index page after editing.
+                NavigationManager.NavigateTo("/PaymentMethod/Index");
+            }
+            else
+            {
+                // Handle the case where the payment method is not found in the database.
+                // This is just a placeholder. You can decide how you want to handle this scenario.
+                Console.WriteLine("Payment method not found!");
+            }
+        }
+    }
+}

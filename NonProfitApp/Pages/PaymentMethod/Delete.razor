@@ -1,0 +1,49 @@
+@page "/PaymentMethod/Delete/{PaymentMethodId:int}"
+@using NonProfitLibrary
+@using Services
+@inject PaymentMethodService paymentMethodService
+@inject NavigationManager NavigationManager
+
+<h1>Delete Payment Method</h1>
+
+@if (paymentMethod == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Are you sure you want to delete this payment method?</h3>
+    <div>
+        <h4>Payment Method Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@paymentMethod.Name</dd>
+        </dl>
+
+        <button @onclick="DeletePaymentMethod" class="btn btn-danger">Delete</button>
+        <a href="/PaymentMethod/Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+
+@code
+{
+    private PaymentMethod? paymentMethod;
+
+    [Parameter] public int PaymentMethodId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        paymentMethod = await paymentMethodService.GetPaymentMethodByIdAsync(PaymentMethodId);
+    }
+
+    private async Task DeletePaymentMethod()
+    {
+        if (paymentMethod != null)
+        {
+            await paymentMethodService.DeletePaymentMethodAsync(paymentMethod.PaymentMethodId);
+            // Redirect to the index page after deletion.
+            NavigationManager.NavigateTo("/PaymentMethod/Index");
+        }
+    }
+}

@@ -1,0 +1,50 @@
+@page "/TransactionType/Delete/{TransactionTypeId:int}"
+@using NonProfitLibrary
+@using Services
+@inject TransactionTypeService transactionTypeService // Assuming this service exists and can handle transaction types
+@inject NavigationManager NavigationManager
+
+<h1>Delete Transaction Type</h1>
+
+@if (transactionType == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Are you sure you want to delete this transaction type?</h3>
+    <div>
+        <h4>Transaction Type Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Name</dt>
+            <dd class="col-sm-10">@transactionType.Name</dd>
+            <dt class="col-sm-2">Description</dt>
+            <dd class="col-sm-10">@transactionType.Description</dd>
+        </dl>
+
+        <button @onclick="DeleteTransactionType" class="btn btn-danger">Delete</button>
+        <a href="/TransactionType/Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+
+@code {
+    private TransactionType? transactionType;
+
+    [Parameter] public int TransactionTypeId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        transactionType = await transactionTypeService.GetTransactionTypeByIdAsync(TransactionTypeId);
+    }
+
+    private async Task DeleteTransactionType()
+    {
+        if (transactionType != null)
+        {
+            await transactionTypeService.DeleteTransactionTypeAsync(transactionType.TransactionTypeId);
+            // Redirect to the index page after deletion.
+            NavigationManager.NavigateTo("/TransactionType/Index");
+        }
+    }
+}

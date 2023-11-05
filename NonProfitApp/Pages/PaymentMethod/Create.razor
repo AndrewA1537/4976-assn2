@@ -1,0 +1,51 @@
+@page "/PaymentMethod/Create"
+@using NonProfitLibrary
+@using Services
+@inject PaymentMethodService paymentMethodService
+@inject NavigationManager NavigationManager
+
+<h1>Create Payment Method</h1>
+
+@if (newPaymentMethod == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm Model="newPaymentMethod" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <InputText id="Name" @bind-Value="newPaymentMethod.Name" class="form-control" />
+                    <ValidationMessage For="@(() => newPaymentMethod.Name)" />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+
+    <div>
+        <a href="/PaymentMethod/Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
+
+@code {
+    private PaymentMethod? newPaymentMethod = new PaymentMethod();
+
+    private async Task HandleValidSubmit()
+    {
+        if (newPaymentMethod != null)
+        {
+            await paymentMethodService.CreatePaymentMethodAsync(newPaymentMethod);
+            // Navigate to the list page after successfully adding the payment method
+            NavigationManager.NavigateTo("/PaymentMethod/Index");
+        }
+    }
+}

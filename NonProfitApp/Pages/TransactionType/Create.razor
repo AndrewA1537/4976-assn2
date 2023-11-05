@@ -1,0 +1,48 @@
+@page "/TransactionType/Create"
+@using NonProfitLibrary
+@using Services
+@inject TransactionTypeService transactionTypeService
+@inject NavigationManager NavigationManager
+
+<h1>Create Transaction Type</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="newTransactionType" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <InputText id="Name" @bind-Value="newTransactionType.Name" class="form-control" />
+                <ValidationMessage For="@(() => newTransactionType.Name)" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <InputTextArea id="Description" @bind-Value="newTransactionType.Description" class="form-control" />
+                <ValidationMessage For="@(() => newTransactionType.Description)" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/TransactionType/Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@code {
+    private TransactionType newTransactionType = new TransactionType();
+
+    private async Task HandleValidSubmit()
+    {
+        if (newTransactionType != null)
+        {
+            await transactionTypeService.CreateTransactionTypeAsync(newTransactionType);
+            // Navigate to the list page after successfully adding the transaction type
+            NavigationManager.NavigateTo("/TransactionType/Index");
+        }
+    }
+}
