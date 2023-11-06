@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using NonProfitLibrary;
-
 namespace NonProfitApp.Data;
 
 public static class SeedData

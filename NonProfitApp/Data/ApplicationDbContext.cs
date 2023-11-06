@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using NonProfitLibrary;
-
-namespace NonProfitApp.Data;
+﻿namespace NonProfitApp.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {
