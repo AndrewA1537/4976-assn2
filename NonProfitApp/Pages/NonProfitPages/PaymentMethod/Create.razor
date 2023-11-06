@@ -2,9 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject PaymentMethodService paymentMethodService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Create Payment Method</h1>
+
+<hr>
 
 @if (newPaymentMethod == null)
 {
@@ -45,7 +47,7 @@ else
         {
             await paymentMethodService.CreatePaymentMethodAsync(newPaymentMethod);
             // Navigate to the list page after successfully adding the payment method
-            NavigationManager.NavigateTo("/PaymentMethod/Index");
+            navigationManager.NavigateTo("/PaymentMethod/Index");
         }
     }
 }

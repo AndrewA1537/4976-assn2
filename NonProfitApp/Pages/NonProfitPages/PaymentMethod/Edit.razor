@@ -2,9 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject PaymentMethodService paymentMethodService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Edit Payment Method</h1>
+
+<hr>
 
 @if (paymentMethod == null)
 {
@@ -12,7 +14,6 @@
 }
 else
 {
-    <h3>Edit Payment Method Details</h3>
     <EditForm Model="paymentMethod" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -48,7 +49,7 @@ else
             if (updatedPaymentMethod != null)
             {
                 // Redirect to the index page after editing.
-                NavigationManager.NavigateTo("/PaymentMethod/Index");
+                navigationManager.NavigateTo("/PaymentMethod/Index");
             }
             else
             {

@@ -2,7 +2,9 @@
 @using Services
 @inject ContactListService contactListService
 
-<h1>Details</h1>
+<h1>Contact Details</h1>
+
+<hr>
 
 @if (contact == null)
 {
@@ -11,8 +13,6 @@
 else
 {
     <div>
-        <h4>ContactList</h4>
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">First Name</dt>
             <dd class="col-sm-10">@contact.FirstName</dd>
@@ -31,7 +31,7 @@ else
         </dl>
     </div>
     <div>
-        <a class="btn btn-warning" href="/ContactList/Edit/@contact.AccountNo">Edit</a> |
+        <a class="btn btn-warning" href="/ContactList/Edit/@contact.AccountNo">Edit</a>
         <a class="btn btn-secondary" href="/ContactList/Index">Back to List</a>
     </div>
 }

@@ -2,7 +2,9 @@
 @using Services
 @inject PaymentMethodService paymentMethodService
 
-<h1>Index</h1>
+<h1>Payment Methods List</h1>
+
+<hr>
 
 <p>
     <a href="/PaymentMethod/Create" class="btn btn-primary">Create New</a>
@@ -14,7 +16,7 @@
 }
 else if (paymentMethods.Count == 0)
 {
-    <p><em>No contacts found.</em></p>
+    <p><em>No payment methods found.</em></p>
 }
 else
 {

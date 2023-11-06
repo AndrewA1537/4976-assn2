@@ -2,9 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject TransactionTypeService transactionTypeService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Edit Transaction Type</h1>
+
+<hr>
 
 @if (transactionType == null)
 {
@@ -12,7 +14,6 @@
 }
 else
 {
-    <h3>Edit Transaction Type Details</h3>
     <EditForm Model="transactionType" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -54,7 +55,7 @@ else
             if (updatedTransactionType != null)
             {
                 // Redirect to the index page after editing.
-                NavigationManager.NavigateTo("/TransactionType/Index");
+                navigationManager.NavigateTo("/TransactionType/Index");
             }
             else
             {

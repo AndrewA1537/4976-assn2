@@ -2,10 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject DonationsService donationsService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
+<h1>Donation Details</h1>
 
-<h1>Details</h1>
+<hr>
 
 @if (donation == null)
 {
@@ -14,8 +15,6 @@
 else
 {
     <div>
-        <h4>Donation</h4>
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">Date</dt>
             <dd class="col-sm-10">@donation.Date.ToShortDateString()</dd>
@@ -49,7 +48,7 @@ else
         </dl>
     </div>
     <div>
-        <button class="btn btn-warning" @onclick="() => EditDonation(donation!.TransId)">Edit</button> |
+        <button class="btn btn-warning" @onclick="() => EditDonation(donation!.TransId)">Edit</button>
         <button class="btn btn-secondary" @onclick="() => BackToList()">Back to List</button>
     </div>
 }
@@ -65,11 +64,11 @@ else
 
     private void EditDonation(int donationId)
     {
-        NavigationManager.NavigateTo($"/DonationEdit/{donationId}");
+        navigationManager.NavigateTo($"/DonationEdit/{donationId}");
     }
 
     private void BackToList()
     {
-        NavigationManager.NavigateTo("/DonationList");
+        navigationManager.NavigateTo("/DonationList");
     }
 }

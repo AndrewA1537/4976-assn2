@@ -1,10 +1,12 @@
 @page "/Donations/Index"
+
 @using NonProfitLibrary
 @using Services
 @inject DonationsService donationsService
-@inject NavigationManager navigationManager
 
-<h1>Index</h1>
+<h1>Donations List</h1>
+
+<hr>
 
 <p>
     <a href="/Donations/Create" class="btn btn-primary">Create New</a>
@@ -51,9 +53,9 @@ else
                     <td>@donation?.TransactionType?.Name</td>
                     <td>@donation?.PaymentMethod?.Name</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="/Donations/Edit/@donation?.AccountNo">Edit</a>
-                        <a class="btn btn-primary btn-sm" href="/Donations/Details/@donation?.AccountNo">Details</a>
-                        <a class="btn btn-danger btn-sm" href="/Donations/Delete/@donation?.AccountNo">Delete</a>
+                        <a class="btn btn-warning btn-sm" href="/Donations/Edit/@donation?.TransId">Edit</a>
+                        <a class="btn btn-primary btn-sm" href="/Donations/Details/@donation?.TransId">Details</a>
+                        <a class="btn btn-danger btn-sm" href="/Donations/Delete/@donation?.TransId">Delete</a>
                     </td>
                 </tr>
             }

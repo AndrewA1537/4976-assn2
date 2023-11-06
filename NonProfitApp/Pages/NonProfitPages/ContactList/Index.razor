@@ -2,7 +2,9 @@
 @using Services
 @inject ContactListService contactListService
 
-<h1>Index</h1>
+<h1>Contact List</h1>
+
+<hr>
 
 <p>
     <a href="/ContactList/Create" class="btn btn-primary">Create New</a>
@@ -31,6 +33,7 @@ else
                 <th></th>
             </tr>
         </thead>
+
         <tbody>
             @foreach (var contact in contacts)
             {

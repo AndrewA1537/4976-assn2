@@ -2,9 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject ContactListService contactListService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Edit Contact</h1>
+
+<hr>
 
 @if (contact == null)
 {
@@ -12,7 +14,6 @@
 }
 else
 {
-    <h3>Edit Contact Details</h3>
     <EditForm Model="contact" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -71,7 +72,7 @@ else
             if (updatedContact != null)
             {
                 // Redirect to the index page after editing.
-                NavigationManager.NavigateTo("/ContactList/Index");
+                navigationManager.NavigateTo("/ContactList/Index");
             }
             else
             {

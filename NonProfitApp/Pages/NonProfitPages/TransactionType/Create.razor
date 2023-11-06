@@ -2,9 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject TransactionTypeService transactionTypeService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Create Transaction Type</h1>
+
+<hr>
 
 <div class="row">
     <div class="col-md-4">
@@ -42,7 +44,7 @@
         {
             await transactionTypeService.CreateTransactionTypeAsync(newTransactionType);
             // Navigate to the list page after successfully adding the transaction type
-            NavigationManager.NavigateTo("/TransactionType/Index");
+            navigationManager.NavigateTo("/TransactionType/Index");
         }
     }
 }

@@ -45,13 +45,13 @@ namespace NonProfitApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2028126d-d445-48e3-b8e5-4af65b87fbdf",
+                            Id = "bbe66628-db9c-4da5-8495-c727d5058d1c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "97c1a41d-0cd3-4241-a256-0337945568c5",
+                            Id = "e1c07ca8-0930-4165-b0bd-263a76a6e9de",
                             Name = "Finance",
                             NormalizedName = "FINANCE"
                         });
@@ -146,33 +146,33 @@ namespace NonProfitApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d6a5449b-065a-47b5-8b8f-1a907ed379bc",
+                            Id = "3220350f-6fa7-4936-8c40-6538bcc18d17",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c92e1ac-ef48-4288-8caf-f5071cf2e22b",
+                            ConcurrencyStamp = "e799bb1c-3427-4b9d-8a4b-ee1d4778978f",
                             Email = "a@a.a",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "A@A.A",
                             NormalizedUserName = "A@A.A",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE8RgGI7NErw1aIjLzNYBZUMaW1rjWvWVsfy8oEebYq6N4VPVPF4YBGnDbTrXyK7yg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKplqoGZswtZttmPwJDca/4yFkNlzff2+UjTeeuaIY9ojyoPkgynONKUPxHUbX/msA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "329b9b63-91ad-4058-9a8e-e68f169a87dd",
+                            SecurityStamp = "0176773e-c4ca-49cc-aa60-121403a171ae",
                             TwoFactorEnabled = false,
                             UserName = "a@a.a"
                         },
                         new
                         {
-                            Id = "c143785e-68c3-4aff-8e33-98c77adf284b",
+                            Id = "e6572e50-2f74-4ced-93d2-8d9bc5d400c6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ebd9839-3949-4b6f-a021-3a96a0f0baed",
+                            ConcurrencyStamp = "1cf19050-89a7-4501-87a9-752b2eda70ca",
                             Email = "f@f.f",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "F@F.F",
                             NormalizedUserName = "F@F.F",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGTmX5GgQhCF3tNY7vbbHhx8LxReQAkRIZo3i6MaCYcU4vwFiuEhL90ThyWPdAcSdA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDA2Pg7ySnh9zFMHhjbgTDBdDFF83k49gMDolIS3CDMWpg3p5uVk9drjn28Rvk+I7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01e17a3c-a43b-4af5-accb-166fa65fdaba",
+                            SecurityStamp = "84176057-2615-4dc2-828f-d39c2e40927f",
                             TwoFactorEnabled = false,
                             UserName = "f@f.f"
                         });
@@ -242,13 +242,13 @@ namespace NonProfitApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d6a5449b-065a-47b5-8b8f-1a907ed379bc",
-                            RoleId = "2028126d-d445-48e3-b8e5-4af65b87fbdf"
+                            UserId = "3220350f-6fa7-4936-8c40-6538bcc18d17",
+                            RoleId = "bbe66628-db9c-4da5-8495-c727d5058d1c"
                         },
                         new
                         {
-                            UserId = "c143785e-68c3-4aff-8e33-98c77adf284b",
-                            RoleId = "97c1a41d-0cd3-4241-a256-0337945568c5"
+                            UserId = "e6572e50-2f74-4ced-93d2-8d9bc5d400c6",
+                            RoleId = "e1c07ca8-0930-4165-b0bd-263a76a6e9de"
                         });
                 });
 
@@ -331,12 +331,12 @@ namespace NonProfitApp.Data.Migrations
                             AccountNo = 1,
                             City = "Anytown",
                             Country = "USA",
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4735),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1875),
                             CreatedBy = "System",
                             Email = "john@email.com",
                             FirstName = "John",
                             LastName = "Doe",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4737),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1877),
                             ModifiedBy = "System",
                             PostalCode = "12345",
                             Street = "123 Main St"
@@ -346,12 +346,12 @@ namespace NonProfitApp.Data.Migrations
                             AccountNo = 2,
                             City = "Anytown",
                             Country = "USA",
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4752),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1887),
                             CreatedBy = "System",
                             Email = "jane@email.com",
                             FirstName = "Jane",
                             LastName = "Doe",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4754),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1888),
                             ModifiedBy = "System",
                             PostalCode = "12345",
                             Street = "123 Main St"
@@ -361,12 +361,12 @@ namespace NonProfitApp.Data.Migrations
                             AccountNo = 3,
                             City = "Anytown",
                             Country = "CAN",
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4761),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1894),
                             CreatedBy = "System",
                             Email = "Bob@email.com",
                             FirstName = "Bob",
                             LastName = "Smith",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4763),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1895),
                             ModifiedBy = "System",
                             PostalCode = "12345",
                             Street = "123 Main St"
@@ -425,10 +425,10 @@ namespace NonProfitApp.Data.Migrations
                             TransId = 4,
                             AccountNo = 1,
                             Amount = 1100f,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4946),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2050),
                             CreatedBy = "System",
-                            Date = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4937),
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4947),
+                            Date = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2045),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2052),
                             ModifiedBy = "System",
                             Notes = "Donation",
                             PaymentMethodId = 1,
@@ -439,10 +439,10 @@ namespace NonProfitApp.Data.Migrations
                             TransId = 5,
                             AccountNo = 2,
                             Amount = 1200f,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4958),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2063),
                             CreatedBy = "System",
-                            Date = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4955),
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4959),
+                            Date = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2061),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2064),
                             ModifiedBy = "System",
                             Notes = "Event",
                             PaymentMethodId = 2,
@@ -453,10 +453,10 @@ namespace NonProfitApp.Data.Migrations
                             TransId = 6,
                             AccountNo = 3,
                             Amount = 1300f,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4966),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2071),
                             CreatedBy = "System",
-                            Date = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4964),
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4967),
+                            Date = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2069),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2072),
                             ModifiedBy = "System",
                             Notes = "Membership",
                             PaymentMethodId = 3,
@@ -537,27 +537,27 @@ namespace NonProfitApp.Data.Migrations
                         new
                         {
                             PaymentMethodId = 1,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4880),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1989),
                             CreatedBy = "System",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4884),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1990),
                             ModifiedBy = "System",
                             Name = "Cash"
                         },
                         new
                         {
                             PaymentMethodId = 2,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4894),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2003),
                             CreatedBy = "System",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4896),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2004),
                             ModifiedBy = "System",
                             Name = "Check"
                         },
                         new
                         {
                             PaymentMethodId = 3,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4901),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2009),
                             CreatedBy = "System",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4902),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(2010),
                             ModifiedBy = "System",
                             Name = "Credit Card"
                         });
@@ -598,30 +598,30 @@ namespace NonProfitApp.Data.Migrations
                         new
                         {
                             TransactionTypeId = 1,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4813),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1942),
                             CreatedBy = "System",
                             Description = "Donation",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4814),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1943),
                             ModifiedBy = "System",
                             Name = "Donation"
                         },
                         new
                         {
                             TransactionTypeId = 2,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4823),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1950),
                             CreatedBy = "System",
                             Description = "Membership",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4824),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1952),
                             ModifiedBy = "System",
                             Name = "Membership"
                         },
                         new
                         {
                             TransactionTypeId = 3,
-                            Created = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4829),
+                            Created = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1957),
                             CreatedBy = "System",
                             Description = "Event",
-                            Modified = new DateTime(2023, 11, 4, 20, 56, 37, 928, DateTimeKind.Local).AddTicks(4831),
+                            Modified = new DateTime(2023, 11, 6, 15, 33, 28, 613, DateTimeKind.Local).AddTicks(1959),
                             ModifiedBy = "System",
                             Name = "Event"
                         });

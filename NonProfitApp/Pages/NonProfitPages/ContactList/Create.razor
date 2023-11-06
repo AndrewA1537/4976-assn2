@@ -2,11 +2,11 @@
 @using NonProfitLibrary
 @using Services
 @inject ContactListService contactListService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
-<h1>Create</h1>
+<h1>Create Contact</h1>
 
-<h4>ContactList</h4>
+<hr>
 
 @if (newContact == null)
 {
@@ -84,6 +84,6 @@ else
     {
         await contactListService.InsertContactAsync(newContact);
         // Navigate to the list page after successfully adding the contact
-        NavigationManager.NavigateTo("/ContactList/Index");
+        navigationManager.NavigateTo("/ContactList/Index");
     }
 }

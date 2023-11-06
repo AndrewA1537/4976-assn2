@@ -2,68 +2,69 @@
 @using NonProfitLibrary
 @using Services
 @inject DonationsService donationsService
-@inject ContactListService accountService
+@inject ContactListService contactListService
 @inject TransactionTypeService transactionTypeService
 @inject PaymentMethodService paymentMethodService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Edit Donation</h1>
 
-@if (donation == null)
+<hr>
+
+@if (donations == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <h3>Edit Donation Details</h3>
-    <EditForm Model="donation" OnValidSubmit="HandleValidSubmit">
+    <EditForm Model="donations" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
         <div class="form-group">
             <label for="Date">Date</label>
-            <InputDate id="Date" @bind-Value="donation.Date" class="form-control" />
-            <ValidationMessage For="@(() => donation.Date)" class="text-danger" />
+            <InputDate id="Date" @bind-Value="donations.Date" class="form-control" />
+            <ValidationMessage For="@(() => donations.Date)" class="text-danger" />
         </div>
         <div class="form-group">
             <label for="AccountNo">Account Number</label>
-            <InputSelect id="AccountNo" @bind-Value="donation.AccountNo" class="form-control">
-                @foreach (var account in accounts ?? new List<ContactList>()) // Assuming you have a list named accounts
+            <InputSelect id="AccountNo" @bind-Value="donations.AccountNo" class="form-control">
+                @foreach (var contact in contacts ?? new List<ContactList>()) // Assuming you have a list named accounts
                 {
-                    <option value="@account.AccountNo">@account.FirstName</option>
+                    <option value="@contact.AccountNo">@contact.FirstName</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => donation.AccountNo)" class="text-danger" />
+            <ValidationMessage For="@(() => donations.AccountNo)" class="text-danger" />
         </div>
         <div class="form-group">
             <label for="TransactionTypeId">Transaction Type</label>
-            <InputSelect id="TransactionTypeId" @bind-Value="donation.TransactionTypeId" class="form-control">
+            <InputSelect id="TransactionTypeId" @bind-Value="donations.TransactionTypeId" class="form-control">
                 @foreach (var transactionType in transactionTypes ?? new List<TransactionType>()) // Assuming you have a list named transactionTypes
                 {
                     <option value="@transactionType.TransactionTypeId">@transactionType.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => donation.TransactionTypeId)" class="text-danger" />
+            <ValidationMessage For="@(() => donations.TransactionTypeId)" class="text-danger" />
         </div>
         <div class="form-group">
             <label for="Amount">Amount</label>
-            <InputNumber id="Amount" @bind-Value="donation.Amount" class="form-control" />
-            <ValidationMessage For="@(() => donation.Amount)" class="text-danger" />
+            <InputNumber id="Amount" @bind-Value="donations.Amount" class="form-control" />
+            <ValidationMessage For="@(() => donations.Amount)" class="text-danger" />
         </div>
         <div class="form-group">
             <label for="PaymentMethodId">Payment Method</label>
-            <InputSelect id="PaymentMethodId" @bind-Value="donation.PaymentMethodId" class="form-control">
+            <InputSelect id="PaymentMethodId" @bind-Value="donations.PaymentMethodId" class="form-control">
                 @foreach (var paymentMethod in paymentMethods ?? new List<PaymentMethod>()) // Assuming you have a list named paymentMethods
                 {
                     <option value="@paymentMethod.PaymentMethodId">@paymentMethod.Name</option>
                 }
             </InputSelect>
-            <ValidationMessage For="@(() => donation.PaymentMethodId)" class="text-danger" />
+            <ValidationMessage For="@(() => donations.PaymentMethodId)" class="text-danger" />
         </div>
         <div class="form-group">
             <label for="Notes">Notes</label>
-            <InputTextArea id="Notes" @bind-Value="donation.Notes" class="form-control" />
-            <ValidationMessage For="@(() => donation.Notes)" class="text-danger" />
+            <InputTextArea id="Notes" @bind-Value="donations.Notes" class="form-control" />
+            <ValidationMessage For="@(() => donations.Notes)" class="text-danger" />
         </div>
 
         <div class="form-group">
@@ -75,8 +76,8 @@ else
 }
 
 @code {
-    private Donations? donation;
-    private List<ContactList>? accounts;
+    private Donations? donations;
+    private List<ContactList>? contacts;
     private List<TransactionType>? transactionTypes;
     private List<PaymentMethod>? paymentMethods;
 
@@ -84,21 +85,21 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        donation = await donationsService.GetDonationByIdAsync(DonationId);
-        accounts = await accountService.GetContactsAsync();
+        donations = await donationsService.GetDonationByIdAsync(DonationId);
+        contacts = await contactListService.GetContactsAsync();
         transactionTypes = await transactionTypeService.GetAllTransactionTypesAsync();
         paymentMethods = await paymentMethodService.GetAllPaymentMethodsAsync();
     }
 
     private async Task HandleValidSubmit()
     {
-        if (donation != null)
+        if (donations != null)
         {
-            var updatedDonation = await donationsService.UpdateDonationAsync(DonationId, donation);
+            var updatedDonation = await donationsService.UpdateDonationAsync(DonationId, donations);
             if (updatedDonation != null)
             {
                 // Redirect to the index page after editing.
-                NavigationManager.NavigateTo("/Donations/Index");
+                navigationManager.NavigateTo("/Donations/Index");
             }
             else
             {
