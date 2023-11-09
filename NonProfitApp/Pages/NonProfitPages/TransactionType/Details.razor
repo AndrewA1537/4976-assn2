@@ -1,6 +1,7 @@
 @page "/TransactionType/Details/{TransactionTypeId:int}"
 @using Services
 @inject TransactionTypeService transactionTypeService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Transaction Type Details</h1>
 

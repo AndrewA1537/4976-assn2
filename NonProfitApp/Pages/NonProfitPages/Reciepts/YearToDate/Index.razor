@@ -1,0 +1,65 @@
+@page "/Reciepts/YearToDate/Index"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+
+<h1>Year to Date Report</h1>
+
+<hr>
+
+@if (donations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container-fluid">
+        <h4>Donations made to Zenith Non-profit</h4>
+
+        <div>
+            <p>Date: <b>@startOfYear.ToString("MMMM dd, yyyy") until @DateTime.Now.ToString("MMMM dd, yyyy")</b></p>
+
+            @if (donations.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var donation in donations.Where(d => d.Date >= startOfYear && d.Date <= DateTime.Now).OrderByDescending(d => d.Amount))
+                        {
+                            <tr>
+                                <td>@donation.Account?.FirstName @donation.Account?.LastName</td>
+                                <td>@donation.Amount.ToString("C")</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>@donations.Where(d => d.Date >= startOfYear && d.Date <= DateTime.Now).Sum(d =>
+                                        d.Amount).ToString("C")</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p><em>No donations found for the current year.</em></p>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    private DateTime startOfYear = new DateTime(DateTime.Now.Year, 1, 1);
+    private List<Donations>? donations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        donations = await donationsService.GetAllDonationsAsync();
+        // You can optionally filter the donations here instead of in the Razor code.
+        // donations = donations.Where(d => d.Date >= startOfYear && d.Date <= DateTime.Now).ToList();
+    }
+}

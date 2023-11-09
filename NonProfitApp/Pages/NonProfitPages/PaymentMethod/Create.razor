@@ -3,6 +3,7 @@
 @using Services
 @inject PaymentMethodService paymentMethodService
 @inject NavigationManager navigationManager
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Create Payment Method</h1>
 

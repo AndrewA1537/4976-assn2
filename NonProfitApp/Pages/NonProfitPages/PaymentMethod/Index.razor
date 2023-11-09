@@ -1,6 +1,7 @@
 @page "/PaymentMethod/Index"
 @using Services
 @inject PaymentMethodService paymentMethodService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Payment Methods List</h1>
 

@@ -3,6 +3,7 @@
 @using Services
 @inject TransactionTypeService transactionTypeService
 @inject NavigationManager navigationManager
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Create Transaction Type</h1>
 

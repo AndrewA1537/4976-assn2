@@ -1,6 +1,7 @@
 @page "/TransactionType/Index"
 @using Services
 @inject TransactionTypeService transactionTypeService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Transaction Type List</h1>
 

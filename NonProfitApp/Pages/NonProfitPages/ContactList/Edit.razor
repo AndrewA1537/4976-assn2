@@ -3,6 +3,7 @@
 @using Services
 @inject ContactListService contactListService
 @inject NavigationManager navigationManager
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Edit Contact</h1>
 

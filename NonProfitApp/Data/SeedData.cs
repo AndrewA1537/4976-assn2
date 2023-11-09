@@ -149,46 +149,46 @@ public static class SeedData
     {
         List<Donations> donations = new List<Donations>()
         {
-            // CURRENT DATE TIME SEED DATA
+            // 2023 SEED DATA
             new Donations()
             {
                 TransId           = 4,
-                Date              = DateTime.Now,
+                Date              = new DateTime(2023, 1, 15), // January 15, 2023
                 AccountNo         = 1,
                 TransactionTypeId = 1,
                 Amount            = 1100,
                 PaymentMethodId   = 1,
                 Notes             = "Donation",
-                Created           = DateTime.Now,
-                Modified          = DateTime.Now,
+                Created           = new DateTime(2023, 1, 15), // January 15, 2023
+                Modified          = new DateTime(2023, 1, 15), // January 15, 2023
                 CreatedBy         = "System",
                 ModifiedBy        = "System"
                 },
             new Donations()
             {
                 TransId           = 5,
-                Date              = DateTime.Now,
+                Date              = new DateTime(2023, 6, 20), // June 20, 2023
                 AccountNo         = 2,
                 TransactionTypeId = 2,
                 Amount            = 1200,
                 PaymentMethodId   = 2,
                 Notes             = "Event",
-                Created           = DateTime.Now,
-                Modified          = DateTime.Now,
+                Created           = new DateTime(2023, 6, 20), // June 20, 2023
+                Modified          = new DateTime(2023, 6, 20), // June 20, 2023
                 CreatedBy         = "System",
                 ModifiedBy        = "System"
             },
             new Donations()
             {
                 TransId           = 6,
-                Date              = DateTime.Now,
+                Date              = new DateTime(2023, 11, 1), // November 1, 2023
                 AccountNo         = 3,
                 TransactionTypeId = 3,
                 Amount            = 1300,
                 PaymentMethodId   = 3,
                 Notes             = "Membership",
-                Created           = DateTime.Now,
-                Modified          = DateTime.Now,
+                Created           = new DateTime(2023, 11, 1), // November 1, 2023
+                Modified          = new DateTime(2023, 11, 1), // November 1, 2023
                 CreatedBy         = "System",
                 ModifiedBy        = "System"
             },

@@ -1,0 +1,54 @@
+@page "/Reciepts/YearlyReport/Index"
+@using NonProfitLibrary
+@using Services
+@inject DonationsService donationsService
+
+<h1>Yearly Report</h1>
+
+<hr>
+
+@if (donations == null)
+{
+    <p><em>Loading yearly donations data...</em></p>
+}
+else
+{
+    <div class="container-fluid">
+        <h4 class="">Donations made to Zenith Non-profit yearly</h4>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var group in donations.GroupBy(d => d.Date.Year).OrderByDescending(g => g.Key))
+                    {
+                        var yearTotal = group.Sum(d => d.Amount);
+                        <tr>
+                            <td>@group.Key</td>
+                            <td>@yearTotal.ToString("C")</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td><strong>@donations.Sum(d => d.Amount).ToString("C")</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code
+{
+    private List<Donations>? donations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        donations = await donationsService.GetAllDonationsAsync();
+    }
+}

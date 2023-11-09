@@ -1,4 +1,10 @@
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
+global using System.Security.Claims;
 global using NonProfitLibrary;
+global using NonProfitApp.Data;
+global using Microsoft.AspNetCore.Components.Authorization;
+global using NonProfitApp.Areas.Identity;
+global using NonProfitApp.Services;

@@ -1,13 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using NonProfitApp.Data;
-using NonProfitLibrary;
-
 namespace NonProfitApp.Services;
 
 [Authorize(Roles = "Admin, Finance")]
@@ -59,10 +49,10 @@ public class DonationsService
 
 
         // Set the creation and modification data here if needed
-        donation.Created = DateTime.Now;
+        donation.Created  = DateTime.Now;
         donation.Modified = DateTime.Now;
         // donation.CreatedBy and ModifiedBy should be set based on the current user
-        donation.CreatedBy = currentUserName; // Set based on the current user's name
+        donation.CreatedBy  = currentUserName; // Set based on the current user's name
         donation.ModifiedBy = currentUserName; // You can also separate this if different logic is needed for ModifiedBy
 
         _context.Donations.Add(donation);
@@ -76,7 +66,7 @@ public class DonationsService
         if (donation == null) return null;
 
         // Update the fields of donation
-        donation.Date = updatedDonation.Date;
+        donation.Date      = updatedDonation.Date;
         donation.AccountNo = updatedDonation.AccountNo;
         // ... other fields
         donation.Modified = DateTime.Now;

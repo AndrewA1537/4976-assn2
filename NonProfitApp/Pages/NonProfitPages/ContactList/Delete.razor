@@ -2,7 +2,8 @@
 @using NonProfitLibrary
 @using Services
 @inject ContactListService contactListService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Delete Contact</h1>
 
@@ -60,7 +61,7 @@ else
         {
             await contactListService.DeleteContactAsync(contact.AccountNo);
             // Redirect to the index page after deletion.
-            NavigationManager.NavigateTo("/ContactList/Index");
+            navigationManager.NavigateTo("/ContactList/Index");
         }
     }
 }

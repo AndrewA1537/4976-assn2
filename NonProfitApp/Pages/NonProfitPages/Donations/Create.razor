@@ -2,14 +2,14 @@
 @using NonProfitLibrary
 @using Services
 @inject DonationsService donationsService
-@inject ContactListService accountService
+@inject ContactListService contactListService
 @inject TransactionTypeService transactionTypeService
 @inject PaymentMethodService paymentMethodService
-@inject NavigationManager NavigationManager
+@inject NavigationManager navigationManager
 
 <h1>Create Donation</h1>
 
-<h4>Donation</h4>
+<hr>
 
 @if (newDonation == null)
 {
@@ -31,14 +31,14 @@ else
                     <ValidationMessage For="@(() => newDonation.Date)" />
                 </div>
 
-                <!-- AccountNo Dropdown -->
+                <!-- Account Dropdown -->
                 <div class="form-group">
                     <label for="Account">Account</label>
                     <InputSelect id="Account" @bind-Value="newDonation.AccountNo" class="form-control">
-                        <option value="">-- Select Account No --</option>
-                        @foreach (var account in accounts ?? new List<ContactList>())
+                        <option value="">-- Select Account --</option>
+                        @foreach (var contact in contactList ?? new List<ContactList>())
                         {
-                            <option value="@account.AccountNo">@account.Email</option>
+                            <option value="@contact.AccountNo">@contact.Email</option>
                         }
                     </InputSelect>
                     <ValidationMessage For="@(() => newDonation.AccountNo)" />
@@ -101,21 +101,24 @@ else
 
 @code
 {
-    private Donations newDonation = new Donations();
-    private List<ContactList>? accounts;
+    private Donations              newDonation = new Donations();
+    private List<ContactList>?     contactList;
     private List<TransactionType>? transactionTypes;
-    private List<PaymentMethod>? paymentMethods;
+    private List<PaymentMethod>?   paymentMethods;
 
     protected override async Task OnInitializedAsync()
     {
-        accounts = await accountService.GetContactsAsync();
+        contactList      = await contactListService.GetContactsAsync();
         transactionTypes = await transactionTypeService.GetAllTransactionTypesAsync();
-        paymentMethods = await paymentMethodService.GetAllPaymentMethodsAsync();
+        paymentMethods   = await paymentMethodService.GetAllPaymentMethodsAsync();
+
+        // Initialize the Date property to the current date
+        newDonation.Date = DateTime.Today;
     }
 
     private async Task HandleValidSubmit()
     {
         await donationsService.CreateDonationAsync(newDonation);
-        NavigationManager.NavigateTo("/Donations/Index");
+        navigationManager.NavigateTo("/Donations/Index");
     }
 }

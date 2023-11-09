@@ -1,0 +1,75 @@
+@page "/ContactList/Reciepts/{AccountId:int}"
+@using Services
+@inject ContactListService contactListService
+@inject DonationsService donationsService
+@attribute [Authorize(Roles = "Admin")]
+
+<h1>Contact Reciepts</h1>
+
+<hr>
+
+@if (contact == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    var currentYearDonations = donations?.Where(d => d.Date.Year == DateTime.Now.Year).OrderByDescending(d => d.Date);
+
+    <div class="container-fluid">
+        <h4 class="m-2">Donations made to Zenith Non-profit</h4>
+
+        <div>
+            <br>
+            <p class="m-2"><b>Name: @contact?.FirstName @contact?.LastName</b></p>
+
+            @if (currentYearDonations != null && currentYearDonations.Any())
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in currentYearDonations.OrderByDescending(d => d.Date))
+                        {
+                            <tr>
+                                <td>@item.Date.ToString("yyyy MMMM, dd")</td>
+                                <td>@string.Format("{0:C}", item.Amount)</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td><b>@string.Format("{0:C}", currentYearDonations.Sum(d => d.Amount))</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p><em>No donations found for this account.</em></p>
+            }
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-secondary" href="/ContactList/Index">Back to List</a>
+    </div>
+}
+
+@code
+{
+    private List<NonProfitLibrary.Donations>? donations;
+    [Parameter] public int AccountId { get; set; }
+
+    private NonProfitLibrary.ContactList? contact;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contact = await contactListService.GetContactByIdAsync(AccountId);
+        var allDonations = await donationsService.GetAllDonationsAsync();
+        donations = allDonations.Where(d => d.AccountNo == AccountId).ToList();
+    }
+}

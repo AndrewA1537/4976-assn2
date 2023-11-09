@@ -1,6 +1,7 @@
 @page "/ContactList/Details/{AccountId:int}"
 @using Services
 @inject ContactListService contactListService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Contact Details</h1>
 

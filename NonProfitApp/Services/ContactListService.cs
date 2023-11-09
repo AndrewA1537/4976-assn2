@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using NonProfitApp.Data;
-using NonProfitLibrary;
-
 namespace NonProfitApp.Services;
 
 [Authorize(Roles = "Admin")]
@@ -47,7 +38,7 @@ public class ContactListService
 
         // Update the properties
         contact.FirstName = updatedContact.FirstName;
-        contact.LastName = updatedContact.LastName;
+        contact.LastName  = updatedContact.LastName;
         // ... Other properties
 
         _context.Update(contact);

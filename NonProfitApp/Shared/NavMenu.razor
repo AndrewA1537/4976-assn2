@@ -18,13 +18,17 @@
             </NavLink>
         </div>
 
+        <br>
+
         @if (user?.Identity?.IsAuthenticated ?? false)
         {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/ContactList/Index">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Contact List
-                </NavLink>
-            </div>
+            <AuthorizeView Roles="Admin">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/ContactList/Index">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Contact List
+                    </NavLink>
+                </div>
+            </AuthorizeView>
 
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="/Donations/Index">
@@ -32,25 +36,34 @@
                 </NavLink>
             </div>
 
+            <AuthorizeView Roles="Admin">
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/PaymentMethod/Index">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Payment Methods
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="/TransactionType/Index">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Transaction Types
+                    </NavLink>
+                </div>
+            </AuthorizeView>
+
+            <br>
+
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/PaymentMethod/Index">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Payment Methods
+                <NavLink class="nav-link" href="/Reciepts/YearToDate/Index">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Year to Date Report
                 </NavLink>
             </div>
 
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/TransactionType/Index">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Transaction Types
-                </NavLink>
-            </div>
-
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/Reciepts/Index">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Reciepts
+                <NavLink class="nav-link" href="/Reciepts/YearlyReport/Index">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Yearly Report
                 </NavLink>
             </div>
         }
-
     </nav>
 </div>
 

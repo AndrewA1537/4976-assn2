@@ -1,6 +1,7 @@
 @page "/PaymentMethod/Details/{PaymentMethodId:int}"
 @using Services
 @inject PaymentMethodService paymentMethodService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Payment Method Details</h1>
 

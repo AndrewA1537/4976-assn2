@@ -1,6 +1,7 @@
 @page "/ContactList/Index"
 @using Services
 @inject ContactListService contactListService
+@attribute [Authorize (Roles = "Admin")]
 
 <h1>Contact List</h1>
 
@@ -48,7 +49,8 @@ else
                     <td>
                         <a class="btn btn-warning btn-sm" href="/ContactList/Edit/@contact.AccountNo">Edit</a>
                         <a class="btn btn-primary btn-sm" href="/ContactList/Details/@contact.AccountNo">Details</a>
-                        <a class="btn btn-danger btn-sm" href="/ContactList/Delete/@contact.AccountNo">Delete</a>
+                        <a class="btn btn-danger btn-sm me-4" href="/ContactList/Delete/@contact.AccountNo">Delete</a>
+                        <a class="btn btn-primary btn-sm" href="/ContactList/Reciepts/@contact.AccountNo">Report</a>
                     </td>
                 </tr>
             }
