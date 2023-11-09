@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace NonProfitApp.Data.Migrations
+namespace NonProfitLibrary.Data.Migrations
 {
     /// <inheritdoc />
     public partial class M1 : Migration
@@ -261,8 +261,8 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "14daf2bb-afc6-4565-a6de-ddee43b80ac4", null, "Admin", "ADMIN" },
-                    { "f7c25f49-115b-4fdc-8538-8668bb7dd1bf", null, "Finance", "FINANCE" }
+                    { "698f2971-36ec-40f6-8ace-6e59abc650f6", null, "Finance", "FINANCE" },
+                    { "c58bca53-bb34-40ad-8290-e018db7cb398", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -270,8 +270,8 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "15d9c97e-ce6c-430d-a0d7-37609cd2291f", 0, "058cb143-c67d-4bea-bcb8-09f4e933d6d9", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAEBCOJIqksv5FDuHK9KCfrtVR0BzAwAD2UTE15lklkZLKnz35bP45q37ovdm8uvimrg==", null, false, "ffaa5795-f90c-493f-8b97-7876fc8a528b", false, "f@f.f" },
-                    { "ef1f3a33-17a5-4e77-a122-147fa0992f6f", 0, "f1f79ed6-475b-4b6d-9527-dc5dad721d3e", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEGc90m1xXH6F/WT1o2nMQDx+/rYMLkjtnjJTN7kAKrgrIe62mNLZaVjfR7sbtaoHaA==", null, false, "de60878c-5c67-4d12-b9bc-5549e5b7efa1", false, "a@a.a" }
+                    { "59c2aa2f-019e-467b-be8c-f5bf6aa7b792", 0, "b561638c-5d12-4ef4-81eb-441c1d765119", "f@f.f", true, false, null, "F@F.F", "F@F.F", "AQAAAAIAAYagAAAAEBfvkcTpKLahuuSzl43gCbqd502z4LS/xsSVWaNClg4TAa28rtdvCeaPqvLtCdNeMA==", null, false, "c802be77-9b54-4059-99b0-a323ecbf42e4", false, "f@f.f" },
+                    { "b31e4f93-1426-4214-b314-4b521c3856c1", 0, "71313c10-23e8-46e1-b0ac-36298c7911cb", "a@a.a", true, false, null, "A@A.A", "A@A.A", "AQAAAAIAAYagAAAAEHW9EtEsHVfhDm+lDkFVp6VssIXWoHcpb08YbyGYipE7aUpy4kz8Di0c1AIMLC7GLg==", null, false, "ab34af4e-52fd-4b8c-8133-d97bcfdc70b1", false, "a@a.a" }
                 });
 
             migrationBuilder.InsertData(
@@ -279,9 +279,9 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "AccountNo", "City", "Country", "Created", "CreatedBy", "Email", "FirstName", "LastName", "Modified", "ModifiedBy", "PostalCode", "Street" },
                 values: new object[,]
                 {
-                    { 1, "Anytown", "USA", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9569), "System", "john@email.com", "John", "Doe", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9571), "System", "12345", "123 Main St" },
-                    { 2, "Anytown", "USA", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9581), "System", "jane@email.com", "Jane", "Doe", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9583), "System", "12345", "123 Main St" },
-                    { 3, "Anytown", "CAN", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9589), "System", "Bob@email.com", "Bob", "Smith", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9590), "System", "12345", "123 Main St" }
+                    { 1, "Anytown", "USA", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1260), "System", "john@email.com", "John", "Doe", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1262), "System", "12345", "123 Main St" },
+                    { 2, "Anytown", "USA", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1271), "System", "jane@email.com", "Jane", "Doe", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1272), "System", "12345", "123 Main St" },
+                    { 3, "Anytown", "CAN", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1278), "System", "Bob@email.com", "Bob", "Smith", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1279), "System", "12345", "123 Main St" }
                 });
 
             migrationBuilder.InsertData(
@@ -289,9 +289,9 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "PaymentMethodId", "Created", "CreatedBy", "Modified", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9674), "System", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9676), "System", "Cash" },
-                    { 2, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9684), "System", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9685), "System", "Check" },
-                    { 3, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9690), "System", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9691), "System", "Credit Card" }
+                    { 1, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1367), "System", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1369), "System", "Cash" },
+                    { 2, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1376), "System", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1378), "System", "Check" },
+                    { 3, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1382), "System", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1384), "System", "Credit Card" }
                 });
 
             migrationBuilder.InsertData(
@@ -299,9 +299,9 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "TransactionTypeId", "Created", "CreatedBy", "Description", "Modified", "ModifiedBy", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9629), "System", "Donation", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9630), "System", "Donation" },
-                    { 2, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9638), "System", "Membership", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9639), "System", "Membership" },
-                    { 3, new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9644), "System", "Event", new DateTime(2023, 11, 9, 14, 10, 0, 686, DateTimeKind.Local).AddTicks(9645), "System", "Event" }
+                    { 1, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1317), "System", "Donation", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1320), "System", "Donation" },
+                    { 2, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1326), "System", "Membership", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1328), "System", "Membership" },
+                    { 3, new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1333), "System", "Event", new DateTime(2023, 11, 9, 14, 40, 1, 564, DateTimeKind.Local).AddTicks(1334), "System", "Event" }
                 });
 
             migrationBuilder.InsertData(
@@ -309,8 +309,8 @@ namespace NonProfitApp.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "f7c25f49-115b-4fdc-8538-8668bb7dd1bf", "15d9c97e-ce6c-430d-a0d7-37609cd2291f" },
-                    { "14daf2bb-afc6-4565-a6de-ddee43b80ac4", "ef1f3a33-17a5-4e77-a122-147fa0992f6f" }
+                    { "698f2971-36ec-40f6-8ace-6e59abc650f6", "59c2aa2f-019e-467b-be8c-f5bf6aa7b792" },
+                    { "c58bca53-bb34-40ad-8290-e018db7cb398", "b31e4f93-1426-4214-b314-4b521c3856c1" }
                 });
 
             migrationBuilder.InsertData(
