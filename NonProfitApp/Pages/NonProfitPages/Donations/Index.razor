@@ -30,8 +30,8 @@ else
                 <th>Notes</th>
                 <th>Created</th>
                 <th>Last Modified</th>
-                <th>Created By</th>
-                <th>Modified By</th>
+                @* <th>Created By</th>
+                <th>Modified By</th> *@
                 <th>Email</th>
                 <th>Transaction Type</th>
                 <th>Payment Method</th>
@@ -47,8 +47,8 @@ else
                     <td>@donation.Notes</td>
                     <td>@donation.Created.ToString("yyyy-MM-dd")</td>
                     <td>@donation.Modified.ToString("yyyy-MM-dd")</td>
-                    <td>@donation.CreatedBy</td>
-                    <td>@donation.ModifiedBy</td>
+                    @* <td>@donation.CreatedBy</td>
+                    <td>@donation.ModifiedBy</td> *@
                     <td>@donation?.Account?.Email</td>
                     <td>@donation?.TransactionType?.Name</td>
                     <td>@donation?.PaymentMethod?.Name</td>

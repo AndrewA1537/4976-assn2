@@ -13,12 +13,6 @@ public class DonationsService
 
     }
 
-    private string GetCurrentUserId()
-    {
-        // If the resulting value is null, return an empty string or a default string
-        return _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
-    }
-
     private string GetCurrentUserName()
     {
         // If the resulting value is null, return an empty string or a default string
@@ -49,10 +43,10 @@ public class DonationsService
 
 
         // Set the creation and modification data here if needed
-        donation.Created  = DateTime.Now;
+        donation.Created = DateTime.Now;
         donation.Modified = DateTime.Now;
         // donation.CreatedBy and ModifiedBy should be set based on the current user
-        donation.CreatedBy  = currentUserName; // Set based on the current user's name
+        donation.CreatedBy = currentUserName; // Set based on the current user's name
         donation.ModifiedBy = currentUserName; // You can also separate this if different logic is needed for ModifiedBy
 
         _context.Donations.Add(donation);
@@ -62,15 +56,18 @@ public class DonationsService
 
     public async Task<Donations?> UpdateDonationAsync(int id, Donations updatedDonation)
     {
+        string currentUserName = GetCurrentUserName(); // Gets the current user's name
+
         var donation = await _context.Donations.FindAsync(id);
         if (donation == null) return null;
 
         // Update the fields of donation
-        donation.Date      = updatedDonation.Date;
-        donation.AccountNo = updatedDonation.AccountNo;
+        donation.Date = updatedDonation.Date;
+        // donation.AccountNo = updatedDonation.AccountNo;
         // ... other fields
         donation.Modified = DateTime.Now;
         // donation.ModifiedBy should be updated based on the current user
+        donation.ModifiedBy = currentUserName; // You can also separate this if different logic is needed for ModifiedBy
 
         _context.Donations.Update(donation);
         await _context.SaveChangesAsync();
@@ -85,10 +82,5 @@ public class DonationsService
         _context.Donations.Remove(donation);
         await _context.SaveChangesAsync();
         return true;
-    }
-
-    private bool DonationExists(int id)
-    {
-        return _context.Donations.Any(e => e.TransId == id);
     }
 }

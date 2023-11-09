@@ -18,7 +18,7 @@ else
         <dl class="row">
             <dt class="col-sm-2">Date</dt>
             <dd class="col-sm-10">@donation.Date.ToShortDateString()</dd>
-            
+
             <dt class="col-sm-2">Amount</dt>
             <dd class="col-sm-10">@donation.Amount.ToString("C")</dd>
 
@@ -48,8 +48,8 @@ else
         </dl>
     </div>
     <div>
-        <button class="btn btn-warning" @onclick="() => EditDonation(donation!.TransId)">Edit</button>
-        <button class="btn btn-secondary" @onclick="() => BackToList()">Back to List</button>
+        <a class="btn btn-warning" href="/Donations/Edit/@donation!.TransId">Edit</a>
+        <a class="btn btn-secondary" href="/Donations/Index">Back to List</a>
     </div>
 }
 
@@ -60,15 +60,5 @@ else
     protected override async Task OnInitializedAsync()
     {
         donation = await donationsService.GetDonationByIdAsync(DonationId);
-    }
-
-    private void EditDonation(int donationId)
-    {
-        navigationManager.NavigateTo($"/DonationEdit/{donationId}");
-    }
-
-    private void BackToList()
-    {
-        navigationManager.NavigateTo("/DonationList");
     }
 }

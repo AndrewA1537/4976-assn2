@@ -1,12 +1,16 @@
 ﻿<AuthorizeView>
     <Authorized>
-        <a href="Identity/Account/Manage">Hello, @context.User.Identity?.Name!</a>
+        <!-- You might want to use btn-sm or btn-lg for size adjustment based on your design -->
+        <a href="Identity/Account/Manage" class="btn-outline-secondary">Hello, @context.User.Identity?.Name!</a>
         <form method="post" action="Identity/Account/Logout">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
+            <!-- Using btn-outline-warning for a softer warning color, often associated with actions like logout -->
+            <button type="submit" class="btn btn-outline-danger">Log out</button>
         </form>
     </Authorized>
     <NotAuthorized>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
+        <!-- Using btn-outline-primary for a primary call-to-action -->
+        <a href="Identity/Account/Register" class="btn btn-outline-primary">Register</a>
+        <!-- Using btn-outline-success to suggest a positive action like logging in -->
+        <a href="Identity/Account/Login" class="btn btn-outline-success">Log in</a>
     </NotAuthorized>
 </AuthorizeView>
